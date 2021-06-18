@@ -1,0 +1,65 @@
+.modal {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(63, 51, 86, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0);
+    pointer-events: none;
+}
+
+.modal.active {
+    transform: scale(1);
+    pointer-events: all;
+}
+
+.modal__content {
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: rgba(0, 0, 0, 0.07);
+}
+
+.line {
+    border: 1px solid rgba(236, 235, 237, 0.25);
+}
+
+.label.title {
+    font-family: Inter;
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 41px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.label.info {
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: left;
+    margin-right: 200px;
+}
+
+.button {
+    display: flex;
+    text-align: center;
+    justify-content: flex-end;
+}
+
+.btn.style {
+    height: 40px;
+    width: 180px;
+    border-radius: 6px;
+    background: rgb(105, 121, 248);
+    color: rgba(255, 255, 255, 1);
+    border-color: rgba(105, 121, 248, 0.4);
+}

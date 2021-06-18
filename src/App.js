@@ -1,58 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import React, {useState, useEffect} from 'react';
+import Modal from './modals/Modal'
 import './App.css';
+import Lists from './components/Lists';
+import withListLoading from './components/withListLoading';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+    const [modalActive, setModalActive] = useState(true);
+    const ListLoading = withListLoading(Lists);
+    const [appState, setAppState] = useState({
+        loading: false,
+        repos: null,
+    });
+
+    useEffect(() => {
+        setAppState({ loading: true });
+        const apiUrl = `https://watchlater.cloud.technokratos.com/get/array`;
+        fetch(apiUrl)
+            .then((res) => res.json())
+            .then((repos) => {
+                setAppState({ loading: false, repos: repos });
+            });
+    }, [setAppState]);
+
+    return (
+        <div >
+            <button onClick={() => setModalActive(true)}>click</button>
+            <main>
+                <ListLoading isLoading={appState.loading} repos={appState.repos} />
+            </main>
+            <Modal active={modalActive} setActive={setModalActive}/>
+        </div>
+    );
 }
 
 export default App;
